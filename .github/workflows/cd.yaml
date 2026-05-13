@@ -1,0 +1,19 @@
+name: CD Workflow
+
+on:
+  workflow_run:
+    workflows: ["CI Workflow"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute remote SSH using password
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWD }}
+          script: whoami
