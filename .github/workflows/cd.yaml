@@ -16,7 +16,7 @@ jobs:
       - name: Execute remote SSH using password
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.EC2_SSH_KEY}}
           script: |
