@@ -20,7 +20,12 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.EC2_SSH_KEY}}
           script: |
-            git clone https://github.com/tejas-0-0-7/Github_Acrtions.git
-            cd ~/Github_Acrtions
+            if [ -d ~/Github_Acrtions ]; then
+              cd ~/Github_Acrtions
+              git pull
+            else
+              git clone https://github.com/tejas-0-0-7/Github_Acrtions.git ~/Github_Acrtions
+              cd ~/Github_Acrtions
+            fi
             docker compose pull
             docker compose up -d
